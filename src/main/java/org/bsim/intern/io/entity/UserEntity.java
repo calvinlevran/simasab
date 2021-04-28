@@ -1,7 +1,11 @@
 package org.bsim.intern.io.entity;
 
+import org.bsim.intern.shared.dto.PengajuanIzinDTO;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -26,6 +30,9 @@ public class UserEntity implements Serializable {
 
     @Column(nullable = false, columnDefinition = "VARCHAR(10)", length = 10)
     private String jabatan;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PengajuanIzinEntity> pengajuanIzinEntities = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -73,5 +80,13 @@ public class UserEntity implements Serializable {
 
     public void setJabatan(String jabatan) {
         this.jabatan = jabatan;
+    }
+
+    public List<PengajuanIzinEntity> getPengajuanIzinEntities() {
+        return pengajuanIzinEntities;
+    }
+
+    public void setPengajuanIzinEntities(List<PengajuanIzinEntity> pengajuanIzinEntities) {
+        this.pengajuanIzinEntities = pengajuanIzinEntities;
     }
 }

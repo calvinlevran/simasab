@@ -23,4 +23,12 @@ public class GenerateRandomPublicId {
         }
         return new String(returnValue);
     }
+
+    public String generatePengajuanIzinId(int length) {
+        StringBuilder returnValue = new StringBuilder(length);
+        for(int i=0;i<length;i++){
+            returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
+        }
+        return new String(returnValue);
+    }
 }
