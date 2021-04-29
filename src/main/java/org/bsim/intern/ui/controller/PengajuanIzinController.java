@@ -56,4 +56,19 @@ public class PengajuanIzinController {
         return mapper.map(updateStatus, PengajuanIzinResponse.class);
     }
 
+    @GetMapping(path = "/{userid}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<PengajuanIzinResponse> getIzinByUserid(@PathVariable String userid) {
+        List<PengajuanIzinDTO> getIzin = iPengajuanIzinService.getIzinByUserid(userid);
+        List<PengajuanIzinResponse> value = new ArrayList<>();
+
+        ModelMapper mapper = new ModelMapper();
+
+        for(PengajuanIzinDTO pengajuanIzinDTO : getIzin){
+            value.add(mapper.map(pengajuanIzinDTO, PengajuanIzinResponse.class));
+        }
+
+        if(getIzin == null)
+            return null;
+        return value;
+    }
 }
