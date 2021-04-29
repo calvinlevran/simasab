@@ -88,11 +88,15 @@ public class AbsensiController {
     }
 
     @GetMapping(path = "/{userid}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public AbsensiResponse getAbsenByUserid(@PathVariable String userid){
-        AbsensiDTO getAbsen = iAbsensiService.getAbsenByUserid(userid);
-        if(getAbsen == null)
-            return null;
-        return new ModelMapper().map(getAbsen, AbsensiResponse.class);
+    public List<AbsensiResponse> getAbsenByUserid(@PathVariable String userid){
+        List<AbsensiDTO> absens = iAbsensiService.getAbsensiByUserid(userid);
+
+        List<AbsensiResponse> value = new ArrayList<>();
+        ModelMapper modelMapper = new ModelMapper();
+        for(AbsensiDTO absensiDTO: absens){
+            value.add(modelMapper.map(absensiDTO, AbsensiResponse.class));
+        }
+        return value;
     }
 
 

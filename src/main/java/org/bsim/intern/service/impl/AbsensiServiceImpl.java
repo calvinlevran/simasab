@@ -98,13 +98,17 @@ public class AbsensiServiceImpl implements IAbsensiService {
     }
 
     @Override
-    public AbsensiDTO getAbsenByUserid(String userid) {
+    public List<AbsensiDTO> getAbsensiByUserid(String userid) {
+        List<AbsensiDTO> value = new ArrayList<>();
+        ModelMapper modelMapper = new ModelMapper();
         UserEntity userEntity = userRepository.findByUserid(userid);
-        AbsensiEntity absensiEntity = absensiRepository.findByUserEntity(userEntity);
-        if(absensiEntity == null)
+        List<AbsensiEntity> absens = absensiRepository.findAllByUserEntity(userEntity);
+        for(AbsensiEntity absensiEntity : absens){
+            value.add(modelMapper.map(absensiEntity, AbsensiDTO.class));
+        }
+        if(absens == null)
             return null;
-
-        return new ModelMapper().map(absensiEntity, AbsensiDTO.class);
+        return value;
     }
 
 }
