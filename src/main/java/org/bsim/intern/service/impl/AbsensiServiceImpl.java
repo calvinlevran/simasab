@@ -6,8 +6,6 @@ import org.bsim.intern.io.irepository.AbsensiRepository;
 import org.bsim.intern.io.irepository.UserRepository;
 import org.bsim.intern.service.iservice.IAbsensiService;
 import org.bsim.intern.shared.dto.AbsensiDTO;
-import org.bsim.intern.shared.dto.PengajuanIzinDTO;
-import org.bsim.intern.shared.dto.UserDTO;
 import org.bsim.intern.shared.utils.GenerateRandomPublicId;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -87,4 +85,26 @@ public class AbsensiServiceImpl implements IAbsensiService {
 
         return value;
     }
+
+    @Override
+    public AbsensiDTO updateStatusAbsen(String userid, String absenid, AbsensiDTO absensiDTO) {
+        AbsensiEntity absensiData = absensiRepository.findByAbsenid(absenid);
+
+        ModelMapper mapper = new ModelMapper();
+        absensiData.setChecked(absensiDTO.isChecked());
+
+        AbsensiEntity updateData = absensiRepository.save(absensiData);
+        return new ModelMapper().map(updateData, AbsensiDTO.class);
+    }
+
+    @Override
+    public AbsensiDTO getAbsenByUserid(String userid) {
+        UserEntity userEntity = userRepository.findByUserid(userid);
+        AbsensiEntity absensiEntity = absensiRepository.findByUserEntity(userEntity);
+        if(absensiEntity == null)
+            return null;
+
+        return new ModelMapper().map(absensiEntity, AbsensiDTO.class);
+    }
+
 }

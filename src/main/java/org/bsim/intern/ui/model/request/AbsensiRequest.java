@@ -1,14 +1,12 @@
 package org.bsim.intern.ui.model.request;
 
-import javax.persistence.Column;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class AbsensiRequest {
     private LocalDateTime clockin;
     private LocalDateTime clockcheck;
     private LocalDateTime clockout;
+    private boolean isChecked;
 
     public LocalDateTime getClockin() {
         return clockin;
@@ -32,5 +30,13 @@ public class AbsensiRequest {
 
     public void setClockout(LocalDateTime clockout) {
         this.clockout = clockout;
+    }
+
+    public boolean getIsChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

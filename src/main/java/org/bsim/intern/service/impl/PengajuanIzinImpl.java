@@ -58,6 +58,7 @@ public class PengajuanIzinImpl implements IPengajuanIzinService {
         ModelMapper mapper = new ModelMapper();
         pengajuanIzinData.setChecked(pengajuanIzinDTO.isChecked());
 
+
         PengajuanIzinEntity updateData = pengajuanIzinRepository.save(pengajuanIzinData);
         return new ModelMapper().map(updateData, PengajuanIzinDTO.class);
     }

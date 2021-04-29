@@ -41,7 +41,7 @@ public class PengajuanIzinResponse {
         this.note = note;
     }
 
-    public boolean isChecked() {
+    public boolean getIsChecked() {
         return isChecked;
     }
 

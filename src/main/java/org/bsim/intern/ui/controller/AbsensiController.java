@@ -2,11 +2,8 @@ package org.bsim.intern.ui.controller;
 
 import org.bsim.intern.service.iservice.IAbsensiService;
 import org.bsim.intern.shared.dto.AbsensiDTO;
-import org.bsim.intern.shared.dto.PengajuanIzinDTO;
-import org.bsim.intern.shared.dto.UserDTO;
 import org.bsim.intern.ui.model.request.AbsensiRequest;
 import org.bsim.intern.ui.model.response.AbsensiResponse;
-import org.bsim.intern.ui.model.response.UserResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -76,4 +73,27 @@ public class AbsensiController {
         }
         return value;
     }
+
+    @PutMapping(path = "/{userid}/{absenid}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public AbsensiResponse updateStatusAbsen(@PathVariable String userid,
+                                                  @PathVariable String absenid,
+                                                  @RequestBody AbsensiRequest absensiRequest){
+        ModelMapper mapper = new ModelMapper();
+
+        AbsensiDTO absensiDTO = mapper.map(absensiRequest, AbsensiDTO.class);
+        AbsensiDTO updateStatus = iAbsensiService.updateStatusAbsen(userid, absenid, absensiDTO);
+        return mapper.map(updateStatus, AbsensiResponse.class);
+    }
+
+    @GetMapping(path = "/{userid}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public AbsensiResponse getAbsenByUserid(@PathVariable String userid){
+        AbsensiDTO getAbsen = iAbsensiService.getAbsenByUserid(userid);
+        if(getAbsen == null)
+            return null;
+        return new ModelMapper().map(getAbsen, AbsensiResponse.class);
+    }
+
+
 }

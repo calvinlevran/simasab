@@ -7,7 +7,7 @@ public class AbsensiResponse {
     private LocalDateTime clockin;
     private LocalDateTime clockcheck;
     private LocalDateTime clockout;
-    private boolean isChecked = false;
+    private boolean isChecked;
 
     public String getAbsenid() {
         return absenid;
@@ -41,7 +41,7 @@ public class AbsensiResponse {
         this.clockout = clockout;
     }
 
-    public boolean isChecked() {
+    public boolean getIsChecked() {
         return isChecked;
     }
 
