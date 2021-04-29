@@ -61,4 +61,20 @@ public class PengajuanIzinImpl implements IPengajuanIzinService {
         PengajuanIzinEntity updateData = pengajuanIzinRepository.save(pengajuanIzinData);
         return new ModelMapper().map(updateData, PengajuanIzinDTO.class);
     }
+
+    @Override
+    public List<PengajuanIzinDTO> getIzinByUserid(String userid) {
+        List<PengajuanIzinDTO> value = new ArrayList<>();
+        ModelMapper modelMapper = new ModelMapper();
+        UserEntity userEntity = userRepository.findByUserid(userid);
+        List<PengajuanIzinEntity> izins = pengajuanIzinRepository.findAllByUser(userEntity);
+        for(PengajuanIzinEntity pengajuanIzinEntity : izins){
+            value.add(modelMapper.map(pengajuanIzinEntity, PengajuanIzinDTO.class));
+        }
+        if(izins == null)
+            return null;
+
+        return value;
+    }
+
 }
