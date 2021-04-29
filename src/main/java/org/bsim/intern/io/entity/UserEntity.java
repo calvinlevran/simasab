@@ -31,6 +31,9 @@ public class UserEntity implements Serializable {
     @Column(nullable = false, columnDefinition = "VARCHAR(10)", length = 10)
     private String jabatan;
 
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AbsensiEntity> absensiEntities = new ArrayList<>();
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PengajuanIzinEntity> pengajuanIzinEntities = new ArrayList<>();
 
@@ -82,6 +85,14 @@ public class UserEntity implements Serializable {
         this.jabatan = jabatan;
     }
 
+    public List<AbsensiEntity> getAbsensiEntities() {
+        return absensiEntities;
+    }
+
+    public void setAbsensiEntities(List<AbsensiEntity> absensiEntities) {
+        this.absensiEntities = absensiEntities;
+    }
+
     public List<PengajuanIzinEntity> getPengajuanIzinEntities() {
         return pengajuanIzinEntities;
     }
@@ -89,4 +100,5 @@ public class UserEntity implements Serializable {
     public void setPengajuanIzinEntities(List<PengajuanIzinEntity> pengajuanIzinEntities) {
         this.pengajuanIzinEntities = pengajuanIzinEntities;
     }
+
 }
