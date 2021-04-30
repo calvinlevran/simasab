@@ -10,15 +10,12 @@ public interface IAbsensiService {
     AbsensiDTO updateAbsensiClockCheck(String userid, String absenid, AbsensiDTO absensiDTO);
 
     AbsensiDTO updateAbsensiClockOut(String userid, String absenid, AbsensiDTO absensiDTO);
-<<<<<<< HEAD
-
-    List<AbsensiDTO> getListAbsensi();
 
     AbsensiDTO updateStatusAbsen(String userid, String absenid, AbsensiDTO absensiDTO);
 
     List<AbsensiDTO> getAbsensiByUserid(String userid);
-=======
+
     List<AbsensiDTO> getListAbsensi(Integer pageNo, Integer pageSize, String sortBy);
->>>>>>> feature_absensi
+
 }
 
