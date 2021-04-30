@@ -32,11 +32,14 @@ public class PengajuanIzinController {
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<PengajuanIzinResponse> getAllIzins(){
-        List<PengajuanIzinDTO> izins = iPengajuanIzinService.getListIzin();
+    public List<PengajuanIzinResponse> getAllIzins(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                   @RequestParam(defaultValue = "5") Integer pageSize,
+                                                   @RequestParam(defaultValue = "id") String sortBy){
+        List<PengajuanIzinDTO> izins = iPengajuanIzinService.getListIzin(pageNo, pageSize, sortBy);
 
         List<PengajuanIzinResponse> value = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();
+
         for(PengajuanIzinDTO pengajuanIzinDTO: izins){
             value.add(modelMapper.map(pengajuanIzinDTO, PengajuanIzinResponse.class));
         }

@@ -1,15 +1,14 @@
 package org.bsim.intern.shared.dto;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.List;
+import java.time.LocalDate;
 
 public class PengajuanIzinDTO implements Serializable {
     private static final long serialVersionUID = 1261755895328547362L;
     private long id;
     private String izinId;
-    private LocalDateTime tanggalMulai;
-    private LocalDateTime tanggalSelesai;
+    private LocalDate tanggalMulai;
+    private LocalDate tanggalSelesai;
     private String note;
     private boolean isChecked; //is checked
 
@@ -29,21 +28,13 @@ public class PengajuanIzinDTO implements Serializable {
         this.izinId = izinId;
     }
 
-    public LocalDateTime getTanggalMulai() {
-        return tanggalMulai;
-    }
+    public LocalDate getTanggalMulai() { return tanggalMulai; }
 
-    public void setTanggalMulai(LocalDateTime tanggalMulai) {
-        this.tanggalMulai = tanggalMulai;
-    }
+    public void setTanggalMulai(LocalDate tanggalMulai) { this.tanggalMulai = tanggalMulai; }
 
-    public LocalDateTime getTanggalSelesai() {
-        return tanggalSelesai;
-    }
+    public LocalDate getTanggalSelesai() { return tanggalSelesai; }
 
-    public void setTanggalSelesai(LocalDateTime tanggalSelesai) {
-        this.tanggalSelesai = tanggalSelesai;
-    }
+    public void setTanggalSelesai(LocalDate tanggalSelesai) { this.tanggalSelesai = tanggalSelesai; }
 
     public String getNote() {
         return note;

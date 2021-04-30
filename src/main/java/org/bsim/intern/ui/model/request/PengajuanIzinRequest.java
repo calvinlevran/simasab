@@ -1,26 +1,26 @@
 package org.bsim.intern.ui.model.request;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class PengajuanIzinRequest {
-    private LocalDateTime tanggalMulai;
-    private LocalDateTime tanggalSelesai;
+    private LocalDate tanggalMulai;
+    private LocalDate tanggalSelesai;
     private String note;
     private boolean isChecked; //is checked
 
-    public LocalDateTime getTanggalMulai() {
+    public LocalDate getTanggalMulai() {
         return tanggalMulai;
     }
 
-    public void setTanggalMulai(LocalDateTime tanggalMulai) {
+    public void setTanggalMulai(LocalDate tanggalMulai) {
         this.tanggalMulai = tanggalMulai;
     }
 
-    public LocalDateTime getTanggalSelesai() {
+    public LocalDate getTanggalSelesai() {
         return tanggalSelesai;
     }
 
-    public void setTanggalSelesai(LocalDateTime tanggalSelesai) {
+    public void setTanggalSelesai(LocalDate tanggalSelesai) {
         this.tanggalSelesai = tanggalSelesai;
     }
 

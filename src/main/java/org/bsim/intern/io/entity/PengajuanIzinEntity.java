@@ -2,7 +2,7 @@ package org.bsim.intern.io.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "PengajuanIzin")
@@ -18,10 +18,10 @@ public class PengajuanIzinEntity implements Serializable {
     private String izinId;
 
     @Column(nullable = false)
-    private LocalDateTime tanggalMulai;
+    private LocalDate tanggalMulai;
 
     @Column(nullable = false)
-    private LocalDateTime tanggalSelesai;
+    private LocalDate tanggalSelesai;
 
     @Column(nullable = false)
     private String note;
@@ -48,21 +48,13 @@ public class PengajuanIzinEntity implements Serializable {
         this.izinId = izinId;
     }
 
-    public LocalDateTime getTanggalMulai() {
-        return tanggalMulai;
-    }
+    public LocalDate getTanggalMulai() { return tanggalMulai; }
 
-    public void setTanggalMulai(LocalDateTime tanggalMulai) {
-        this.tanggalMulai = tanggalMulai;
-    }
+    public void setTanggalMulai(LocalDate tanggalMulai) { this.tanggalMulai = tanggalMulai; }
 
-    public LocalDateTime getTanggalSelesai() {
-        return tanggalSelesai;
-    }
+    public LocalDate getTanggalSelesai() { return tanggalSelesai; }
 
-    public void setTanggalSelesai(LocalDateTime tanggalSelesai) {
-        this.tanggalSelesai = tanggalSelesai;
-    }
+    public void setTanggalSelesai(LocalDate tanggalSelesai) { this.tanggalSelesai = tanggalSelesai; }
 
     public String getNote() {
         return note;

@@ -8,6 +8,10 @@ import org.bsim.intern.service.iservice.IPengajuanIzinService;
 import org.bsim.intern.shared.dto.PengajuanIzinDTO;
 import org.bsim.intern.shared.utils.GenerateRandomPublicId;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -40,11 +44,13 @@ public class PengajuanIzinImpl implements IPengajuanIzinService {
     }
 
     @Override
-    public List<PengajuanIzinDTO> getListIzin() {
+    public List<PengajuanIzinDTO> getListIzin(Integer pageNo, Integer pageSize, String sortBy) {
         List<PengajuanIzinDTO> value = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();
 
-        List<PengajuanIzinEntity> izins = pengajuanIzinRepository.findAll();
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
+        Page<PengajuanIzinEntity> izins = pengajuanIzinRepository.findAll(paging);
+
         for(PengajuanIzinEntity pengajuanIzinEntity : izins){
             value.add(modelMapper.map(pengajuanIzinEntity, PengajuanIzinDTO.class));
         }
@@ -55,9 +61,7 @@ public class PengajuanIzinImpl implements IPengajuanIzinService {
     public PengajuanIzinDTO updateStatusIzin(String userId, String izinId, PengajuanIzinDTO pengajuanIzinDTO) {
         PengajuanIzinEntity pengajuanIzinData = pengajuanIzinRepository.findByIzinId(izinId);
 
-        ModelMapper mapper = new ModelMapper();
         pengajuanIzinData.setChecked(pengajuanIzinDTO.isChecked());
-
 
         PengajuanIzinEntity updateData = pengajuanIzinRepository.save(pengajuanIzinData);
         return new ModelMapper().map(updateData, PengajuanIzinDTO.class);
