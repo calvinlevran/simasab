@@ -1,7 +1,5 @@
 package org.bsim.intern.io.entity;
 
-import org.bsim.intern.shared.dto.PengajuanIzinDTO;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;

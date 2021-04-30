@@ -19,8 +19,10 @@ public class UserController {
     IUserService userService;
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<UserResponse> getAllUsers(){
-        List<UserDTO> users = userService.getListUser();
+    public List<UserResponse> getAllUsers(@RequestParam(defaultValue = "0") Integer pageNo,
+                                          @RequestParam(defaultValue = "5") Integer pageSize,
+                                          @RequestParam(defaultValue = "id") String sortBy){
+        List<UserDTO> users = userService.getListUser(pageNo, pageSize, sortBy);
 
         List<UserResponse> value = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();

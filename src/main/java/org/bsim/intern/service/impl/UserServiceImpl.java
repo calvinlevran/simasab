@@ -7,6 +7,10 @@ import org.bsim.intern.shared.dto.UserDTO;
 import org.bsim.intern.shared.utils.GenerateRandomPublicId;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,11 +25,13 @@ public class UserServiceImpl implements IUserService {
     GenerateRandomPublicId generateRandomPublicId;
 
     @Override
-    public List<UserDTO> getListUser() {
+    public List<UserDTO> getListUser(Integer pageNo, Integer pageSize, String sortBy) {
         List<UserDTO> value = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();
+
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
         // Get all user from database
-        List<UserEntity> users = userRepository.findAll();
+        Page<UserEntity> users = userRepository.findAll(paging);
         for(UserEntity userEntity : users){
             value.add(modelMapper.map(userEntity, UserDTO.class));
         }
