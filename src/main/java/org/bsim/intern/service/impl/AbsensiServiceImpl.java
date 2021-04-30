@@ -6,10 +6,12 @@ import org.bsim.intern.io.irepository.AbsensiRepository;
 import org.bsim.intern.io.irepository.UserRepository;
 import org.bsim.intern.service.iservice.IAbsensiService;
 import org.bsim.intern.shared.dto.AbsensiDTO;
-import org.bsim.intern.shared.dto.PengajuanIzinDTO;
-import org.bsim.intern.shared.dto.UserDTO;
 import org.bsim.intern.shared.utils.GenerateRandomPublicId;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -76,11 +78,14 @@ public class AbsensiServiceImpl implements IAbsensiService {
     }
 
     @Override
-    public List<AbsensiDTO> getListAbsensi() {
+    public List<AbsensiDTO> getListAbsensi(Integer pageNo, Integer pageSize, String sortBy) {
         List<AbsensiDTO> value = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();
+
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).ascending());
         // Get absensi from database
-        List<AbsensiEntity> absens = absensiRepository.findAll();
+        Page<AbsensiEntity> absens = absensiRepository.findAll(paging);
+
         for(AbsensiEntity absensiEntity : absens){
             value.add(modelMapper.map(absensiEntity, AbsensiDTO.class));
         }

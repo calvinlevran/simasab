@@ -11,5 +11,5 @@ public interface IAbsensiService {
     AbsensiDTO addNewClockInData(String userid, AbsensiDTO absensiDTO);
     AbsensiDTO updateAbsensiClockCheck(String userid, String absenid, AbsensiDTO absensiDTO);
     AbsensiDTO updateAbsensiClockOut(String userid, String absenid, AbsensiDTO absensiDTO);
-    List<AbsensiDTO> getListAbsensi();
+    List<AbsensiDTO> getListAbsensi(Integer pageNo, Integer pageSize, String sortBy);
 }

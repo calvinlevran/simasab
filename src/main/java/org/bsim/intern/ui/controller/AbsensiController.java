@@ -66,8 +66,10 @@ public class AbsensiController {
     }
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<AbsensiResponse> getAllAbsen(){
-        List<AbsensiDTO> absens = iAbsensiService.getListAbsensi();
+    public List<AbsensiResponse> getAllAbsen(@RequestParam(defaultValue = "0") Integer pageNo,
+                                             @RequestParam(defaultValue = "5") Integer pageSize,
+                                             @RequestParam(defaultValue = "id") String sortBy){
+        List<AbsensiDTO> absens = iAbsensiService.getListAbsensi(pageNo, pageSize, sortBy);
 
         List<AbsensiResponse> value = new ArrayList<>();
         ModelMapper modelMapper = new ModelMapper();

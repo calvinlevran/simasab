@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "absensi_test")
+@Table(name = "absensi")
 public class AbsensiEntity implements Serializable {
     private static final long serialVersionUID= 7990825441501678936L;
 
